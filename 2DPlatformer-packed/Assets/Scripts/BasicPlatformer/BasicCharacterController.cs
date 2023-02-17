@@ -78,13 +78,14 @@ public class BasicCharacterController : MonoBehaviour
 
     void Update()
     {
-
+        Animation();
         //Input for jumping ***Multi Jumping***
         if (Input.GetButtonDown("Jump") && currentjumpCount > 1)
         {
             jumped = true;
             currentjumpCount--;
             Debug.Log("Should jump");
+            
         }
 
 
@@ -96,11 +97,7 @@ public class BasicCharacterController : MonoBehaviour
 
         //Get Player input 
         horizInput = Input.GetAxis("Horizontal");
-        if (horizInput < 0 || horizInput > 0)
-        {
-            anim.SetTrigger("Move");
-        }
-            
+
 
 
     }
@@ -112,4 +109,21 @@ public class BasicCharacterController : MonoBehaviour
         facingRight = !facingRight;
         transform.Rotate(0, 180, 0);
     }
+
+    void Animation()
+    {
+        anim.SetFloat("animspeed", Mathf.Abs(horizInput));
+
+        if (!grounded)
+        {
+            anim.SetBool("animjump", true);
+        }
+
+        if (grounded)
+        {
+            anim.SetBool("animjump", false);
+        }
+
+    }
+
 }
