@@ -17,7 +17,7 @@ public class BasicCharacterController : MonoBehaviour
     protected int currentjumpCount;
 
     public float speed = 5.0f;
-    public float jumpForce = 1000;
+    public float jumpForce = 1;
 
     private float horizInput;
 
@@ -42,7 +42,7 @@ public class BasicCharacterController : MonoBehaviour
         //Linecast to our groundcheck gameobject if we hit a layer called "Level" then we're grounded
         grounded = Physics2D.Linecast(groundedCheckStart.position, groundedCheckEnd.position, 1 << LayerMask.NameToLayer("Level"));
         Debug.DrawLine(groundedCheckStart.position, groundedCheckEnd.position, Color.red);
-        Debug.Log("touching Ground");
+
 
 
         //Move Character
@@ -74,21 +74,23 @@ public class BasicCharacterController : MonoBehaviour
             FlipSprite();
         }
 
+ 
+ 
+
     }
 
     void Update()
     {
         Animation();
+
         //Input for jumping ***Multi Jumping***
         if (Input.GetButtonDown("Jump") && currentjumpCount > 1)
         {
             jumped = true;
             currentjumpCount--;
             Debug.Log("Should jump");
-            
+
         }
-
-
 
         if (grounded)
         {
