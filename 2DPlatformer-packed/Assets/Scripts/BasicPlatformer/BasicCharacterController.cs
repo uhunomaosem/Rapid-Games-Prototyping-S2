@@ -46,7 +46,14 @@ public class BasicCharacterController : MonoBehaviour
 
 
         //Move Character
-        rb.velocity = new Vector2(horizInput * speed * Time.fixedDeltaTime, rb.velocity.y);
+        //if(grounded && rb.velocity !)
+        if(transform.parent != transform.root)
+        {
+            //If they're parented (on the platform)
+
+            //If their horizontal input is not 0
+            rb.velocity = new Vector2(horizInput * speed * Time.fixedDeltaTime, rb.velocity.y);
+        }
 
 
         if (Input.GetButtonDown("Jump") && grounded == true)
