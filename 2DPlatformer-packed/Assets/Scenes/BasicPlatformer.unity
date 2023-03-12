@@ -8997,9 +8997,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecd89fdce91b1ef44ac8ddf58b988e49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxJumps: 2
+  maxJumps: 0
   speed: 350
-  jumpForce: 700
+  jumpForce: 250
   groundedCheckStart: {fileID: 1407805131}
   groundedCheckEnd: {fileID: 65035891}
   grounded: 0

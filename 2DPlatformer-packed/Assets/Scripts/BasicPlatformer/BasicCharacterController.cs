@@ -62,6 +62,10 @@ public class BasicCharacterController : MonoBehaviour
             jumped = true;
             Debug.Log("Should jump");
         }
+        //else if(Input.GetButtonUp("Jump"))
+        //{
+        //    jumped = false;
+        //}
 
         if (jumped == true)
         {
@@ -91,14 +95,7 @@ public class BasicCharacterController : MonoBehaviour
     {
         Animation();
 
-        //Input for jumping ***Multi Jumping***
-        if (Input.GetButtonDown("Jump") && currentjumpCount > 1)
-        {
-            jumped = true;
-            currentjumpCount--;
-            Debug.Log("Should jump");
 
-        }
 
         if (grounded)
         {
