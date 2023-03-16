@@ -16,6 +16,8 @@ public class movingPlat : MonoBehaviour
     private Rigidbody2D rb;
     private Transform moveToPoint;
 
+    Rigidbody2D player;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -58,7 +60,10 @@ public class movingPlat : MonoBehaviour
     {
         rb.MovePosition((Vector2)transform.position + maximumDistance);
         //transform.Translate(Vector2.left * Time.deltaTime);
-       
+       if(player != null)
+        {
+            player.AddForce((Vector2)transform.position + maximumDistance);
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -66,6 +71,7 @@ public class movingPlat : MonoBehaviour
         if (collisionMask == (collisionMask | (1 << collision.gameObject.layer)))
         {
             collision.collider.transform.SetParent(transform);
+            player = collision.otherRigidbody;
         }
     }
 
@@ -74,6 +80,7 @@ public class movingPlat : MonoBehaviour
         if (collisionMask == (collisionMask | (1 << collision.gameObject.layer)))
         {
             collision.collider.transform.SetParent(null);
+            player = null;
         }
     }
 

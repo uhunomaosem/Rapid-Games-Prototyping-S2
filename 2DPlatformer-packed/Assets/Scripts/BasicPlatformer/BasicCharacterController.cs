@@ -44,18 +44,19 @@ public class BasicCharacterController : MonoBehaviour
         Debug.DrawLine(groundedCheckStart.position, groundedCheckEnd.position, Color.red);
 
 
+        rb.velocity = new Vector2(horizInput * speed * Time.fixedDeltaTime, rb.velocity.y);
 
         //Move Character
         //if(grounded && rb.velocity !)
-        if(transform.parent != transform.root)
-        {
-            //If they're parented (on the platform)
-
-            //If their horizontal input is not 0
-            
-        }
-        rb.velocity = new Vector2(horizInput * speed * Time.fixedDeltaTime, rb.velocity.y);
-
+        //if (transform.parent != null && transform.parent.tag == "Moving Platform")
+        //{
+        //    //If they're parented (on the platform)
+        //    rb.AddForce(new Vector2(horizInput * speed * Time.fixedDeltaTime, rb.velocity.y) *2 , ForceMode2D.Force);
+        //}
+        //else
+        //{
+        //    rb.velocity = new Vector2(horizInput * speed * Time.fixedDeltaTime, rb.velocity.y);
+        //}
 
         if (Input.GetButtonDown("Jump") && grounded == true)
         {
@@ -86,8 +87,8 @@ public class BasicCharacterController : MonoBehaviour
             FlipSprite();
         }
 
- 
- 
+
+
 
     }
 
@@ -130,6 +131,23 @@ public class BasicCharacterController : MonoBehaviour
         {
             anim.SetBool("animjump", false);
         }
+
+    }
+
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Enemy")
+        {
+            if (gameObject.GetComponent<Health>() != null)
+            {
+                gameObject.GetComponent<Health>().takeDamage(20);
+            }
+
+
+        }
+
+
 
     }
 

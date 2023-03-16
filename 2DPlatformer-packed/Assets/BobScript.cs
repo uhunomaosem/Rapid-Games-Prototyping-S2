@@ -61,4 +61,19 @@ public class BobScript : MonoBehaviour
         transform.Rotate(0, 180, 0);
         horizInput *= -1;
     }
+
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+
+        if (other.tag == "Projectile")
+        {
+            GetComponent<Health>().takeDamage(20);
+        }
+
+
+    }
+
+
+
 }

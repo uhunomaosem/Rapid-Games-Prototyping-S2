@@ -19,6 +19,12 @@ public class Score : MonoBehaviour
     }
 
 
+    public void removeCoins(int scoretoremove)
+    {
+        score -= scoretoremove;
+        scoreText.text = "Score: " + score;
+    }
+
 
     // Update is called once per frame
     void Update()
