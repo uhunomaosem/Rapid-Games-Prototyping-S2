@@ -13,17 +13,17 @@ public class BasicCharacterController : MonoBehaviour
 {
     protected bool facingRight = true;
     protected bool jumped;
-    public int maxJumps;
-    protected int currentjumpCount;
 
     public float speed = 5.0f;
-    public float jumpForce = 1;
+    public float jumpForce = 16f;
 
     private float horizInput;
 
     public Transform groundedCheckStart;
     public Transform groundedCheckEnd;
     public bool grounded;
+
+
 
     public Rigidbody2D rb;
 
@@ -58,23 +58,24 @@ public class BasicCharacterController : MonoBehaviour
         //    rb.velocity = new Vector2(horizInput * speed * Time.fixedDeltaTime, rb.velocity.y);
         //}
 
-        if (Input.GetButtonDown("Jump") && grounded == true)
-        {
-            jumped = true;
-            Debug.Log("Should jump");
-        }
         //else if(Input.GetButtonUp("Jump"))
         //{
         //    jumped = false;
         //}
 
-        if (jumped == true)
-        {
-            rb.AddForce(new Vector2(0f, jumpForce));
-            Debug.Log("Jumping!");
+        //if (Input.GetButtonDown("Jump") && grounded == true)
+        //{
+        //    jumped = true;
+        //    Debug.Log("Should jump");
+        //}
 
-            jumped = false;
-        }
+        //if (jumped == true)
+        //{
+        //    rb.AddForce(new Vector2(0f, jumpForce));
+        //    Debug.Log("Jumping!");
+
+        //    jumped = false;
+        //}
 
 
         // Detect if character sprite needs flipping
@@ -89,7 +90,6 @@ public class BasicCharacterController : MonoBehaviour
 
 
 
-
     }
 
     void Update()
@@ -97,10 +97,14 @@ public class BasicCharacterController : MonoBehaviour
         Animation();
 
 
-
-        if (grounded)
+        if (Input.GetButtonDown("Jump") && grounded == true)
         {
-            currentjumpCount = maxJumps;
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        }
+
+        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0.0f)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
 
         //Get Player input 
@@ -150,5 +154,8 @@ public class BasicCharacterController : MonoBehaviour
 
 
     }
+
+
+  
 
 }
