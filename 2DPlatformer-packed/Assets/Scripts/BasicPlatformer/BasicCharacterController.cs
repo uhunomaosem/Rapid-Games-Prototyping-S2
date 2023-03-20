@@ -16,6 +16,7 @@ public class BasicCharacterController : MonoBehaviour
 
     public float speed = 5.0f;
     public float jumpForce = 16f;
+    public float currenthealth;
 
     private float horizInput;
 
@@ -23,7 +24,7 @@ public class BasicCharacterController : MonoBehaviour
     public Transform groundedCheckEnd;
     public bool grounded;
 
-
+    public Transform respawnPoint;
 
     public Rigidbody2D rb;
 
@@ -31,6 +32,7 @@ public class BasicCharacterController : MonoBehaviour
 
     void Awake()
     {
+        
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
     }
@@ -58,24 +60,7 @@ public class BasicCharacterController : MonoBehaviour
         //    rb.velocity = new Vector2(horizInput * speed * Time.fixedDeltaTime, rb.velocity.y);
         //}
 
-        //else if(Input.GetButtonUp("Jump"))
-        //{
-        //    jumped = false;
-        //}
 
-        //if (Input.GetButtonDown("Jump") && grounded == true)
-        //{
-        //    jumped = true;
-        //    Debug.Log("Should jump");
-        //}
-
-        //if (jumped == true)
-        //{
-        //    rb.AddForce(new Vector2(0f, jumpForce));
-        //    Debug.Log("Jumping!");
-
-        //    jumped = false;
-        //}
 
 
         // Detect if character sprite needs flipping
@@ -110,6 +95,14 @@ public class BasicCharacterController : MonoBehaviour
         //Get Player input 
         horizInput = Input.GetAxis("Horizontal");
 
+        currenthealth = GetComponent<Health>().health;
+
+        if (currenthealth <= 0)
+        {
+            transform.position = respawnPoint.position;
+            gameObject.GetComponent<Health>().getHealth(100);
+            gameObject.GetComponent<Score>().removeAllCoins();
+        }
 
 
     }
@@ -139,6 +132,7 @@ public class BasicCharacterController : MonoBehaviour
     }
 
 
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Enemy")
@@ -155,7 +149,6 @@ public class BasicCharacterController : MonoBehaviour
 
     }
 
-
-  
+   
 
 }

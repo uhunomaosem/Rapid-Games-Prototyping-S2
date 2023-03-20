@@ -25,6 +25,11 @@ public class Score : MonoBehaviour
         scoreText.text = "Score: " + score;
     }
 
+    public void removeAllCoins()
+    {
+        score -= score;
+        scoreText.text = "Score: " + score;
+    }
 
     // Update is called once per frame
     void Update()

@@ -12,7 +12,11 @@ public class KillVolume : MonoBehaviour
         {
             collision.transform.position = respawnPoint.position;
             collision.gameObject.GetComponent<Health>().getHealth(100);
-            collision.gameObject.GetComponent<Score>().removeCoins(1);
+            if (collision.gameObject.GetComponent<Score>().score > 0)
+            {
+                collision.gameObject.GetComponent<Score>().removeCoins(1);
+
+            }
         }
     }
 }
