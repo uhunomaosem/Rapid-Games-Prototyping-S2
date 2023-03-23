@@ -63,16 +63,7 @@ public class BobScript : MonoBehaviour
     }
 
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
 
-        if (other.tag == "Projectile")
-        {
-            GetComponent<Health>().takeDamage(20);
-        }
-
-
-    }
 
 
 
