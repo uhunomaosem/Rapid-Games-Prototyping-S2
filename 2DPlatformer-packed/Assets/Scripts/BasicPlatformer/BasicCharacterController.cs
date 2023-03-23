@@ -46,19 +46,28 @@ public class BasicCharacterController : MonoBehaviour
         Debug.DrawLine(groundedCheckStart.position, groundedCheckEnd.position, Color.red);
 
 
-        rb.velocity = new Vector2(horizInput * speed * Time.fixedDeltaTime, rb.velocity.y);
+        //rb.velocity = new Vector2(horizInput * speed * Time.fixedDeltaTime, rb.velocity.y);
 
         //Move Character
-        //if(grounded && rb.velocity !)
-        //if (transform.parent != null && transform.parent.tag == "Moving Platform")
-        //{
-        //    //If they're parented (on the platform)
-        //    rb.AddForce(new Vector2(horizInput * speed * Time.fixedDeltaTime, rb.velocity.y) *2 , ForceMode2D.Force);
-        //}
-        //else
-        //{
-        //    rb.velocity = new Vector2(horizInput * speed * Time.fixedDeltaTime, rb.velocity.y);
-        //}
+        //if (grounded && rb.velocity!)
+        if (transform.parent != null && transform.parent.tag == "Moving Platform")
+        {
+        //If they're parented (on the platform)
+
+        //Debug.Log("parented");
+
+            if(horizInput != 0)
+            {
+                Debug.Log(horizInput);
+                rb.velocity = new Vector2(horizInput * speed * Time.fixedDeltaTime, rb.velocity.y);
+            //rb.AddForce(new Vector2(horizInput * speed * Time.fixedDeltaTime, rb.velocity.y) * 2, ForceMode2D.Force);
+            }
+                    
+        }
+        else
+        {
+            rb.velocity = new Vector2(horizInput * speed * Time.fixedDeltaTime, rb.velocity.y);
+        }
 
 
 
@@ -131,24 +140,26 @@ public class BasicCharacterController : MonoBehaviour
 
     }
 
-
-
-    void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.tag == "Enemy")
+        Debug.Log("1");
+        if (other.gameObject.tag == "Enemy")
         {
             if (gameObject.GetComponent<Health>() != null)
             {
                 gameObject.GetComponent<Health>().takeDamage(20);
             }
-
-
         }
-
-
 
     }
 
-   
+    //void OnColliderEnter2D(Collider2D other)
+    //{
+
+
+
+    //}
+
+
 
 }
