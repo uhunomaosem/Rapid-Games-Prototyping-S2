@@ -14,8 +14,8 @@ public class EnemySpawner : MonoBehaviour
 
     public void SpawnEnemy(GameObject player, GameObject prefab)
     {
-        //The radius to spawn enemies around the player
-        float enemySpawnRadius = 2.0f;
+        //The radius to spawn enemies around thse player
+        float enemySpawnRadius = 5.0f;
 
         //The player's position
         Vector3 playerPos = player.transform.position;

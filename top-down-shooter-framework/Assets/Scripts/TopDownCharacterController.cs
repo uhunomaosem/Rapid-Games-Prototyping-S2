@@ -25,12 +25,12 @@ public class TopDownCharacterController : MonoBehaviour
     //The maximum speed the player can move
     [SerializeField] private float playerMaxSpeed = 100f;
 
-    private void Update()
-    {
-        target = transform.GetComponent<Camera>().ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, transform.position.z));
-        Vector3 difference = target - player.transform.position;
+    //private void Update()
+    //{
+    //    target = transform.GetComponent<Camera>().ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, transform.position.z));
+    //    Vector3 difference = target - player.transform.position;
 
-    }
+    //}
     /// <summary>
     /// When the script first initialises
     /// </summary>
