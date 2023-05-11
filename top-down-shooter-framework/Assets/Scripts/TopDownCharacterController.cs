@@ -19,16 +19,14 @@ public class TopDownCharacterController : MonoBehaviour
 
     private Vector3 target;
     public GameObject player;
+    public GameObject bulletprefab;
 
+    private Camera _mainCamera;
     [Header("Movement parameters")]
 
     //The maximum speed the player can move
     [SerializeField] private float playerMaxSpeed = 100f;
 
-    //private void Update()
-    //{
-    //    target = transform.GetComponent<Camera>().ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, transform.position.z));
-    //    Vector3 difference = target - player.transform.position;
 
     //}
     /// <summary>
@@ -57,8 +55,21 @@ public class TopDownCharacterController : MonoBehaviour
         if (!context.performed)
             return;
 
-        //Otherwise:
-        Debug.Log($"Shoot! {Time.time}", gameObject);
+        //spawn bullet
+        GameObject bullet = Instantiate(bulletprefab, transform.position, Quaternion.identity);
+
+        bullet.GetComponent<Projectile>().direction = playerDirection;
+        bullet.GetComponent<Projectile>().speed = 8.0f;
+    }
+
+    public void OnClick(InputAction.CallbackContext context)
+    {
+        if (!context.performed)
+            return;
+
+        var rayHit = Physics2D.GetRayIntersection(_mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
+        if (!rayHit.collider) return;
+        Debug.Log(rayHit.collider.gameObject.name);
     }
 
     /// <summary>

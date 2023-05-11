@@ -8,6 +8,7 @@ public class Timer : MonoBehaviour
 {
     public TextMeshProUGUI timertext;
     public float currentTime;
+    public int seconds;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +19,8 @@ public class Timer : MonoBehaviour
     void Update()
     {
         currentTime += Time.deltaTime;
-        float seconds = currentTime % 60;
-        timertext.text = "Time: " + seconds.ToString("N0");
+        seconds = Mathf.FloorToInt(currentTime);
+        timertext.text = "Time:" + seconds.ToString();
+
     }
 }
