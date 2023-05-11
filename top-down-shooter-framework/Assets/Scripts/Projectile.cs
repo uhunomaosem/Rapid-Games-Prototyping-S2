@@ -9,7 +9,7 @@ public class Projectile : MonoBehaviour
     public float speed = 5.0f;
     void Start()
     {
-        GetComponent<Rigidbody>().velocity = direction * speed;
+        GetComponent<Rigidbody2D>().velocity = direction * speed;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

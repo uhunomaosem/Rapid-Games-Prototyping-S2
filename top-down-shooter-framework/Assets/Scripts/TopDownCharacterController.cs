@@ -62,15 +62,15 @@ public class TopDownCharacterController : MonoBehaviour
         bullet.GetComponent<Projectile>().speed = 8.0f;
     }
 
-    public void OnClick(InputAction.CallbackContext context)
-    {
-        if (!context.performed)
-            return;
+    //public void OnClick(InputAction.CallbackContext context)
+    //{
+    //    if (!context.performed)
+    //        return;
 
-        var rayHit = Physics2D.GetRayIntersection(_mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
-        if (!rayHit.collider) return;
-        Debug.Log(rayHit.collider.gameObject.name);
-    }
+    //    var rayHit = Physics2D.GetRayIntersection(_mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
+    //    if (!rayHit.collider) return;
+    //    Debug.Log(rayHit.collider.gameObject.name);
+    //}
 
     /// <summary>
     /// Called when the player wants to move in a certain direction
