@@ -20,6 +20,8 @@ public class TopDownCharacterController : MonoBehaviour
     private Vector3 target;
     public GameObject player;
     public GameObject bulletprefab;
+    public GameObject GameManagerOBJ;
+
 
     private Camera _mainCamera;
     [Header("Movement parameters")]
@@ -49,33 +51,37 @@ public class TopDownCharacterController : MonoBehaviour
         rb.velocity = playerDirection * (playerSpeed * playerMaxSpeed) * Time.fixedDeltaTime;
     }
 
+    public void OnPlayerInputPause(InputAction.CallbackContext context)
+    {
+        if (!context.performed)
+            return;
+
+        Debug.Log("ITS PAUSING?");
+        GameManagerOBJ.GetComponent<PauseMenu>().PauseGame();
+    }
+
     public void OnPlayerInputShoot(InputAction.CallbackContext context)
     {
         //Not performed? Don't run any other code
         if (!context.performed)
             return;
 
+
         //spawn bullet
         GameObject bullet = Instantiate(bulletprefab, transform.position, Quaternion.identity);
 
-        bullet.GetComponent<Projectile>().direction = playerDirection;
+        if (playerDirection == Vector2.zero)
+        {
+            bullet.GetComponent<Projectile>().direction = Vector2.right;
+        }
+        else
+        {
+            bullet.GetComponent<Projectile>().direction = playerDirection;
+        }
         bullet.GetComponent<Projectile>().speed = 8.0f;
     }
 
-    //public void OnClick(InputAction.CallbackContext context)
-    //{
-    //    if (!context.performed)
-    //        return;
 
-    //    var rayHit = Physics2D.GetRayIntersection(_mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
-    //    if (!rayHit.collider) return;
-    //    Debug.Log(rayHit.collider.gameObject.name);
-    //}
-
-    /// <summary>
-    /// Called when the player wants to move in a certain direction
-    /// </summary>
-    /// <param name="context"></param>
     public void OnPlayerInputMove(InputAction.CallbackContext context)
     {
         if (context.canceled)
@@ -108,5 +114,17 @@ public class TopDownCharacterController : MonoBehaviour
 
         //And set the speed to 1, so they move!
         playerSpeed = 1f;
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+
+        if (other.gameObject.tag == "Enemy")
+        {
+            if (gameObject.GetComponent<Health>() != null)
+            {
+                gameObject.GetComponent<Health>().takeDamage(1);
+            }
+        }
     }
 }

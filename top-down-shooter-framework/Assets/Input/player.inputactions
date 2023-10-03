@@ -24,9 +24,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Click",
+                    "name": "Pause",
                     "type": "Button",
-                    "id": "e3d25506-f8a3-4d94-be7d-f3d6633ac2d1",
+                    "id": "0e838173-c203-4842-a22d-05340db4c2f9",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -168,12 +168,23 @@
                 },
                 {
                     "name": "",
-                    "id": "cbd6b60a-693d-487e-83aa-5e019190ad27",
-                    "path": "<Mouse>/leftButton",
+                    "id": "8ce4b7ec-1403-498a-b57c-6dde6bdca9cf",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Click",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5d0da476-6224-4426-9a6e-2926c8e4ae3c",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

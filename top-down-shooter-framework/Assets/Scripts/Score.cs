@@ -6,20 +6,14 @@ using TMPro;
 using UnityEngine.SceneManagement;
 public class Score : MonoBehaviour
 {
-    public TMP_Text scoreText;
-    public int score = 0;
+    public TMP_Text Kills;
+    public int kills = 0;
 
-    public void AddScore(int scoreToAdd)
+    public void AddScore(int KillstoAdd)
     {
-        score += scoreToAdd;
-        scoreText.text = "Score: " + score;
+        kills += KillstoAdd;
+        Kills.text = "Enemies Killed: " + kills;
     }
 
-    private void Update()
-    {
-        if (score >= 1000)
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        }
-    }
+
 }
